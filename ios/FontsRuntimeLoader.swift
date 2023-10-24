@@ -1,3 +1,6 @@
+import CoreGraphics
+import UIKit
+
 @objc(FontsRuntimeLoader)
 class FontsRuntimeLoader: NSObject {
 
@@ -20,6 +23,21 @@ class FontsRuntimeLoader: NSObject {
     let fileManager = FileManager.default
     guard fileManager.fileExists(atPath: filePath) else {
       reject(nil, "File does not exist at the provided filePath", nil)
+      return
+    }
+
+    guard let fontDataProvider = CGDataProvider(filename: filePath) else {
+      reject(nil, "Could not create font data provider for file at \(filePath)", nil)
+      return
+    }
+
+    guard let newFont = CGFont.create(withDataProvider: fontDataProvider) {
+      reject(nil, "Could not create CGFont from data at \(filePath)", nil)
+      return
+    }
+
+    guard let font = UIFont(name: fontName, size: 16) {
+      reject(nil, "Could not create UIFont from data at \(filePath)", nil)
       return
     }
 
