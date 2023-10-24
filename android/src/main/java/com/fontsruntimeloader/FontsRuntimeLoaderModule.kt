@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.Promise
+import com.facebook.react.views.text.ReactFontManager
 import java.io.File
 import android.graphics.Typeface
 
@@ -43,6 +44,10 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
         promise.reject("TYPEFACE_CREATION_FAILED", "Failed to create typeface from file.")
         return
     }
+
+    val reactFontManager = ReactFontManager.getInstance()
+
+    reactFontManager.addCustomFont(reactContext, fontName, typeface)
 
     promise.resolve(fontName)
   }
