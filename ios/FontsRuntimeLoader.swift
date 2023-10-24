@@ -17,6 +17,12 @@ class FontsRuntimeLoader: NSObject {
       return
     }
 
+    let fileManager = FileManager.default
+    guard fileManager.fileExists(atPath: filePath) else {
+      reject(nil, "File does not exist at the provided filePath", nil)
+      return
+    }
+
     resolve(filePath)
   }
 }
