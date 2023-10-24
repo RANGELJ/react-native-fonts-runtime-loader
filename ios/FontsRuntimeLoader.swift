@@ -31,12 +31,12 @@ class FontsRuntimeLoader: NSObject {
       return
     }
 
-    guard let newFont = CGFont.create(withDataProvider: fontDataProvider) {
+    guard let newFont = CGFont.create(withDataProvider: fontDataProvider) else {
       reject(nil, "Could not create CGFont from data at \(filePath)", nil)
       return
     }
 
-    guard let font = UIFont(name: fontName, size: 16) {
+    guard let font = UIFont(name: fontName, size: 16) else {
       reject(nil, "Could not create UIFont from data at \(filePath)", nil)
       return
     }
