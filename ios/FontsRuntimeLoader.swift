@@ -1,7 +1,7 @@
 @objc(FontsRuntimeLoader)
 class FontsRuntimeLoader: NSObject {
 
-  @objc(loadFontFromFilePath:withB:withResolver:withRejecter:)
+  @objc(loadFontFromFilePath:withResolver:withRejecter:)
   func loadFontFromFilePath(
     params: [String: String],
     resolve:RCTPromiseResolveBlock,
