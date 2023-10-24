@@ -1,5 +1,5 @@
 import CoreGraphics
-import UIKit
+import CoreText
 
 @objc(FontsRuntimeLoader)
 class FontsRuntimeLoader: NSObject {
@@ -36,11 +36,14 @@ class FontsRuntimeLoader: NSObject {
       return
     }
 
-    guard let font = UIFont(name: fontName, size: 16) else {
-      reject(nil, "Could not create UIFont from data at \(filePath)", nil)
+    let error: Unmanaged<CFError>?
+    if !CTFontManagerRegisterGraphicsFont(newFont, &error) {
+      reject(nil, "Could not register font", nil)
       return
     }
 
-    resolve(filePath)
+    var postName = newFont.postScriptName
+
+    resolve(postName)
   }
 }
