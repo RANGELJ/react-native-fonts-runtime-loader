@@ -17,6 +17,11 @@ const FontsRuntimeLoader = NativeModules.FontsRuntimeLoader
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return FontsRuntimeLoader.multiply(a, b);
+type Args = {
+  a: number;
+  b: number;
+};
+
+export function multiply(args: Args): Promise<number> {
+  return FontsRuntimeLoader.multiply(args);
 }
