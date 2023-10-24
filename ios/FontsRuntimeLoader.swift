@@ -3,14 +3,18 @@ class FontsRuntimeLoader: NSObject {
 
   @objc(loadFontFromFilePath:withB:withResolver:withRejecter:)
   func loadFontFromFilePath(
-    params: [String: Float],
+    params: [String: String],
     resolve:RCTPromiseResolveBlock,
     reject:RCTPromiseRejectBlock
   ) -> Void {
-    if let a = params["a"], let b = params["b"] {
-      resolve(a*b)
-    } else {
-      reject(nil, "Invalid parameters", nil)
+    guard let filePath = params["filePath"] else {
+      reject(nil, "filePath not provided", nil)
+      return
     }
+    guard let filePath = params["fontName"] else {
+      reject(nil, "fontName not provided", nil)
+      return
+    }
+    resolve(filePath)
   }
 }
