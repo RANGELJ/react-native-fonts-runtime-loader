@@ -1,6 +1,6 @@
 {
   "name": "react-native-fonts-runtime-loader",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "A way to load font files at runtime",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
