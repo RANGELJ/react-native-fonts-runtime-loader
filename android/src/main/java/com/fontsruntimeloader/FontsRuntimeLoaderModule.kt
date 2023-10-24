@@ -5,7 +5,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.Arguments
 import java.io.File
 import android.graphics.Typeface
 
@@ -25,7 +24,7 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
 
     var fontNameRegex = "^[a-zA-Z]+$".toRegex()
 
-    if (fontNameRegex.matches(fontName)) {
+    if (!fontNameRegex.matches(fontName)) {
       promise.reject("INVALID_FONT_NAME", "The font name '$fontName' is invalid. Should have only letters.")
       return
     }
@@ -45,12 +44,7 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
         return
     }
 
-    val typefaceData = Arguments.createMap()
-    typefaceData.putInt("style", typeface.style)
-    typefaceData.putBoolean("isBold", typeface.isBold)
-    typefaceData.putBoolean("isItalic", typeface.isItalic)
-
-    promise.resolve(typefaceData)
+    promise.resolve(fontName)
   }
 
   companion object {
