@@ -21,7 +21,7 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun loadFontFromFilePath(data: ReadableMap, promise: Promise) {
     var filePath = data.getString("filePath")
-    var fontName = data.getString("fontName")
+    var fontName: String = data.getString("fontName") ?: ""
 
     var fontNameRegex = "^[a-zA-Z]+$".toRegex()
 
