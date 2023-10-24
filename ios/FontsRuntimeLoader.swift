@@ -31,7 +31,7 @@ class FontsRuntimeLoader: NSObject {
       return
     }
 
-    guard let newFont = CGFont.create(withDataProvider: fontDataProvider) else {
+    guard let newFont = CGFont(withDataProvider: fontDataProvider) else {
       reject(nil, "Could not create CGFont from data at \(filePath)", nil)
       return
     }
