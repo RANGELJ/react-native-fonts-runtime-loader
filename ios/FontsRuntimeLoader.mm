@@ -2,7 +2,7 @@
 
 @interface RCT_EXTERN_MODULE(FontsRuntimeLoader, NSObject)
 
-RCT_EXTERN_METHOD(loadFontFromFilePath:(NSObject*)params
+RCT_EXTERN_METHOD(loadFontFromFilePath:(NSDictionary *)params
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 
