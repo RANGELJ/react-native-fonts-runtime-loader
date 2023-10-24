@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.Promise
+import java.io.File
 
 class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -17,9 +18,16 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
   // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
   fun loadFontFromFilePath(data: ReadableMap, promise: Promise) {
-    var a = data.getDouble("a")
-    var b = data.getDouble("b")
-    promise.resolve(a * b)
+    var filePath = data.getString("filePath")
+
+    val file = File(filePath)
+
+    if (!file.exists()) {
+      promise.reject("FILE_NOT_FOUND", "The file does not exist.")
+      return
+    }
+
+    promise.resolve(filePath)
   }
 
   companion object {
