@@ -25,7 +25,7 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
 
     var fontNameRegex = "^[a-zA-Z]+$".toRegex()
 
-    if (fontNameRegex.matched(fontName)) {
+    if (fontNameRegex.matches(fontName)) {
       promise.reject("INVALID_FONT_NAME", "The font name '$fontName' is invalid. Should have only letters.")
       return
     }
