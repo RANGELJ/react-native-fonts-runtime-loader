@@ -1,5 +1,6 @@
 import CoreGraphics
 import CoreText
+import CoreFoundation
 
 @objc(FontsRuntimeLoader)
 class FontsRuntimeLoader: NSObject {
@@ -34,6 +35,15 @@ class FontsRuntimeLoader: NSObject {
     guard let newFont = CGFont(fontDataProvider) else {
       reject(nil, "Could not create CGFont from data at \(filePath)", nil)
       return
+    }
+
+    let registeredFonts = CTFontManagerCopyRegisteredFonts()
+    for i in 0..<CFArrayGetCount(registeredFonts) {
+      let font = unsafeBitCast(CFArrayGetValueAtIndex(registeredFonts, i), to: CGFont.self)
+      if font.postScriptName == newFont.postScriptName {
+        resolve(font.postScriptName)
+        return
+      }
     }
 
     var error: Unmanaged<CFError>?
