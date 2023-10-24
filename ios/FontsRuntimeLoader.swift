@@ -11,10 +11,12 @@ class FontsRuntimeLoader: NSObject {
       reject(nil, "filePath not provided", nil)
       return
     }
-    guard let filePath = params["fontName"] else {
-      reject(nil, "fontName not provided", nil)
+
+    guard let fontName = params["fontName"], fontName.allSatisfy({ $0.isLetter }) else {
+      reject(nil, "Invalid fontName: \(params["fontName"] ?? "") Should have only letters.", nil)
       return
     }
+
     resolve(filePath)
   }
 }
