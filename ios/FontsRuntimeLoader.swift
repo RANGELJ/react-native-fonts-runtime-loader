@@ -36,7 +36,7 @@ class FontsRuntimeLoader: NSObject {
       return
     }
 
-    let error: Unmanaged<CFError>?
+    var error: Unmanaged<CFError>?
     if !CTFontManagerRegisterGraphicsFont(newFont, &error) {
       reject(nil, "Could not register font", nil)
       return
