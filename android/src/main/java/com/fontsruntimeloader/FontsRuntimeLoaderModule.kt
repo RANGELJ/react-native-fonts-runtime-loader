@@ -47,7 +47,7 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
 
     val reactFontManager = ReactFontManager.getInstance()
 
-    reactFontManager.addCustomFont(reactContext, fontName, typeface)
+    reactFontManager.setTypeface(fontName, typeface.style, typeface)
 
     promise.resolve(fontName)
   }
