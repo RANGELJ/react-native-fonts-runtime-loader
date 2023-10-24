@@ -16,7 +16,7 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
   // Example method
   // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
-  fun multiply(data: ReadableMap, promise: Promise) {
+  fun loadFontFromFilePath(data: ReadableMap, promise: Promise) {
     var a = data.getDouble("a")
     var b = data.getDouble("b")
     promise.resolve(a * b)

@@ -22,6 +22,6 @@ type Args = {
   b: number;
 };
 
-export function multiply(args: Args): Promise<number> {
-  return FontsRuntimeLoader.multiply(args);
+export function loadFontFromFilePath(args: Args): Promise<number> {
+  return FontsRuntimeLoader.loadFontFromFilePath(args);
 }
