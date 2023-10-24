@@ -21,6 +21,14 @@ class FontsRuntimeLoaderModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun loadFontFromFilePath(data: ReadableMap, promise: Promise) {
     var filePath = data.getString("filePath")
+    var fontName = data.getString("fontName")
+
+    const fontNameRegex = "^[a-zA-Z]+$".toRegex()
+
+    if (fontNameRegex.matched(fontName)) {
+      promise.reject("INVALID_FONT_NAME", "The font name '$fontName' is invalid. Should have only letters.")
+      return
+    }
 
     val file = File(filePath)
 

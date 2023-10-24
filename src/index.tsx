@@ -19,6 +19,7 @@ const FontsRuntimeLoader = NativeModules.FontsRuntimeLoader
 
 type Args = {
   filePath: string;
+  fontName: string;
 };
 
 export function loadFontFromFilePath(args: Args): Promise<string> {
