@@ -36,24 +36,15 @@ class FontsRuntimeLoader: NSObject {
       reject(nil, "Could not create CGFont from data at \(filePath)", nil)
       return
     }
-
-    let registeredFonts = CTFontManagerCopyRegisteredFonts()
-    for i in 0..<CFArrayGetCount(registeredFonts) {
-      let font = unsafeBitCast(CFArrayGetValueAtIndex(registeredFonts, i), to: CGFont.self)
-      if font.postScriptName == newFont.postScriptName {
-        resolve(font.postScriptName)
-        return
-      }
-    }
-
-    var error: Unmanaged<CFError>?
-    if !CTFontManagerRegisterGraphicsFont(newFont, &error) {
-      reject(nil, "Could not register font", nil)
+      
+    guard let fontNameFromClass = newFont.postScriptName else {
+      reject(nil, "Could not find new fond name", nil)
       return
     }
+      
+    var error: Unmanaged<CFError>?
+    CTFontManagerRegisterGraphicsFont(newFont, &error)
 
-    var postName = newFont.postScriptName
-
-    resolve(postName)
+    resolve(fontNameFromClass)
   }
 }
